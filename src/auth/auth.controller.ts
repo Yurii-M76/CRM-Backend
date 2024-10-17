@@ -15,8 +15,8 @@ import { AuthService } from './auth.service';
 import { Tokens } from './interfaces';
 import { Response } from 'express';
 import { ConfigService } from '@nestjs/config';
+import { UserResponse } from '@user/responses/user.response';
 import { Cookie, Public, UserAgent } from '@common/decorators';
-import { UserResponse } from '@user/responses';
 
 const REFRESH_TOKEN = 'refreshToken';
 
