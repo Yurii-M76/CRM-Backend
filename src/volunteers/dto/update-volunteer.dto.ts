@@ -1,24 +1,30 @@
 import {
   IsEmail,
-  IsNumber,
+  IsInt,
+  IsNotEmpty,
   IsOptional,
-  IsPhoneNumber,
   IsString,
+  Max,
+  Min,
 } from 'class-validator';
 
 export class UpdateVolunteerDto {
-  @IsString()
   @IsOptional()
+  @IsString()
+  @IsNotEmpty()
   surname: string;
 
   @IsString()
+  @IsNotEmpty()
   name: string;
 
   @IsOptional()
   @IsString()
+  @IsNotEmpty()
   patronymic: string;
 
-  @IsPhoneNumber()
+  @IsString()
+  @IsNotEmpty()
   phone: string;
 
   @IsOptional()
@@ -26,10 +32,12 @@ export class UpdateVolunteerDto {
   email: string;
 
   @IsOptional()
-  @IsNumber()
+  @IsInt()
+  @Min(0)
+  @Max(5)
   rating: number;
 
   @IsOptional()
-  @IsString()
+  @IsString({ each: true }) // each проверяет каждый элемент массива на строку
   projects: [];
 }

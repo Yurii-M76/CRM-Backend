@@ -15,8 +15,8 @@ import { AuthService } from './auth.service';
 import { Tokens } from './interfaces';
 import { Response } from 'express';
 import { ConfigService } from '@nestjs/config';
+import { UserResponse } from '@user/responses/user.response';
 import { Cookie, Public, UserAgent } from '@common/decorators';
-import { UserResponse } from '@user/responses';
 
 const REFRESH_TOKEN = 'refreshToken';
 
@@ -101,6 +101,11 @@ export class AuthController {
         this.configService.get('NODE_ENV', 'development') === 'production', // для development - http, для production только https
       path: '/', // путь по которому будут доступны cookies (в данном случае на всех страницах)
     });
-    res.status(HttpStatus.CREATED).json({ accessToken: tokens.accessToken });
+    res.status(HttpStatus.CREATED).json({
+      success: true,
+      accessToken: tokens.accessToken,
+      refreshToken: tokens.refreshToken,
+      userId: tokens.refreshToken.userId,
+    });
   }
 }

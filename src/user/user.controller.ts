@@ -8,7 +8,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { UserResponse } from './responses';
+import { UserResponse } from './responses/user.response';
 import { CurrentUser } from '@common/decorators';
 import { JwtPayload } from '@auth/interfaces';
 
