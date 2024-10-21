@@ -101,6 +101,11 @@ export class AuthController {
         this.configService.get('NODE_ENV', 'development') === 'production', // для development - http, для production только https
       path: '/', // путь по которому будут доступны cookies (в данном случае на всех страницах)
     });
-    res.status(HttpStatus.CREATED).json({ accessToken: tokens.accessToken });
+    res.status(HttpStatus.CREATED).json({
+      success: true,
+      accessToken: tokens.accessToken,
+      refreshToken: tokens.refreshToken,
+      userId: tokens.refreshToken.userId,
+    });
   }
 }

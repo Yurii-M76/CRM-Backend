@@ -31,10 +31,11 @@ export class AuthService {
     if (!token) {
       throw new UnauthorizedException();
     }
-    await this.prismaService.token.delete({ where: { token: refreshToken } });
     if (new Date(token.exp) < new Date()) {
       throw new UnauthorizedException();
     }
+    // Удаляем токен только после проверки его существования и времени жизни
+    await this.prismaService.token.delete({ where: { token: refreshToken } });
     const user = await this.userService.findOne(token.userId);
     return this.generateTokens(user, agent);
   }
